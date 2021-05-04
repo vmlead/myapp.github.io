@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Register Yourself</h2>
+  <form action="app.php" class="needs-validation" method="POST" enctype="multipart/form-data" novalidate>
+    <div class="form-group">
+      <label for="uname">Name:</label>
+      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="mob_num">Mobile Number:</label>
+      <input type="number" class="form-control" id="pwd" placeholder="Enter number" name="mob_num" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="add">Address:</label>
+      <input type="text" class="form-control" id="add" placeholder="Enter address" name="add" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="aadhar_num">Aadhar Number:</label>
+      <input type="number" class="form-control" id="aadhar_num" placeholder="Enter aadhar number" name="aadhar_num" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="front">Upload Aadhar front picture:</label>
+      <input type="file" class="form-control" id="aadhar_front" placeholder="front picture" name="aadhar_front" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="back">Upload Aadhar back picture:</label>
+      <input type="file" class="form-control" id="aadhar_back" placeholder="back picture" name="aadhar_back" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <button type="submit" value = "submit" name = "submit"  class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div class = "container">
+  <h2 id = "reg"></h2>
+</div>
+<div class="container">
+  <div>
+    <h2>Displaying User Info</h2>
+
+    <form action="show.php" class="needs-validation" method="POST" enctype="multipart/form-data">
+      <button type="button" name = "show" onclick="showtable()" class="btn btn-primary">Show Info</button>
+    </form>
+  </div>
+</div>
+<div class = "container" style = "padding: 15px;">
+  <table class = "table table-dark table-striped" id = "show" >
+  </table>
+</div>
+
+<script>
+
+function showtable() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("show").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("POST", "show.php", true);
+  xhttp.send();
+}
+
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+</body>
+</html>
